@@ -5,7 +5,13 @@
     font-style: normal;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
     font-size: 10px;
     background: rgb(149, 194, 215);
 }
@@ -17,6 +23,8 @@ a {
 .thumbnail-item {
     border: 1px solid rgb(100%, 100%, 100%);
     border: 1px solid rgba(100%, 100%, 100%, 0.8);
+    display: inline-block;
+    width: 120px;
 }
 
 .thumbnail-item + .thumbnail-item {
@@ -34,6 +42,9 @@ a {
 .thumbnail-list{
     list-style: none;
     display: block;
+    /* display: inline-block; */
+    white-space: nowrap;
+    overflow-x: auto;
 }
 .thumbnail-image{
     display: block;
@@ -47,4 +58,8 @@ a {
     background-color: rgb(96, 125, 139);
     color: rgb(202, 238, 255);
     font-size: 18px;
+}
+
+.detail-image {
+    width: 90%;
 }
