@@ -1,33 +1,39 @@
 (function (window) {
     'use strict';
-    // 暂时封闭，写个测试
-    // var App = window.App || {};
-    // var Truck = App.Truck;
-    // var DataStore = App.DataStore;
-    // truckID = 'ncc-1701';
-    // var myTruck = new Truck(truckID, new DataStore());
-    // window.myTruck = myTruck;
-
+    var FORM_SELECTOR = '[data-coffee-order="form"]';
     var App = window.App || {};
-    var launchCount = 0;
+    var Truck = App.Truck;
+    var DataStore = App.DataStore;
+    var FormHandler = App.FormHandler;
+    var truckID = 'ncc-1701';
+    var myTruck = new Truck(truckID, new DataStore());
+    window.myTruck = myTruck;
+    var formHandler = new FormHandler(FORM_SELECTOR);
 
-    function Spaceship(shipname) {
-        var Truck = App.Truck;
-        var DataStore = App.DataStore;
-        var myTruck = new Truck(shipname, new DataStore());
-        window.myTruck = myTruck;
-    }
+    formHandler.addSubmitHandler(myTruck.createOrder.bind(myTruck));
+    console.log(formHandler);
 
-    Spaceship.prototype.blastoff = function () {
-        // 闭包允许访问 launchCount 属性
-        launchCount++;
-        console.log("Spaceship Launched!");
-    }
+    // 可以创建多个实例的例子
+    // var App = window.App || {};
+    // var launchCount = 0;
 
-    Spaceship.prototype.reportLaunchCount = function () {
-        console.log("Total number of launches: " + launchCount);
-    }
+    // function Spaceship(shipname) {
+    //     var Truck = App.Truck;
+    //     var DataStore = App.DataStore;
+    //     var myTruck = new Truck(shipname, new DataStore());
+    //     window.myTruck = myTruck;
+    // }
 
-    App.Spaceship = Spaceship;
-    window.App = App;
+    // Spaceship.prototype.blastoff = function () {
+    //     // 闭包允许访问 launchCount 属性
+    //     launchCount++;
+    //     console.log("Spaceship Launched!");
+    // }
+
+    // Spaceship.prototype.reportLaunchCount = function () {
+    //     console.log("Total number of launches: " + launchCount);
+    // }
+
+    // App.Spaceship = Spaceship;
+    // window.App = App;
 })(window);
