@@ -13,6 +13,9 @@
     formHandler.addSubmitHandler(myTruck.createOrder.bind(myTruck));
     console.log(formHandler);
 
+    // 获取 range 值
+    // console.log(document.getElementById("caffeine").value)
+
     // 可以创建多个实例的例子
     // var App = window.App || {};
     // var launchCount = 0;
