@@ -16,6 +16,10 @@
         }
     }
 
+    function Row(coffeeOrder) {
+        // func code
+    }
+
     App.CheckList = CheckList;
     window.App = App;
 })(window);
