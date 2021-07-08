@@ -16,6 +16,14 @@
         }
     }
 
+    CheckList.prototype.addClickHandler = function (fn) {
+        this.$element.on('click', 'input', function (event) {
+            var email = event.target.value;
+            this.removeRow(email);
+            fn(email);
+        }.bind(this));
+    };
+
     CheckList.prototype.addRow = function (coffeeOrder) {
         // 使用咖啡订单信息创建一个新的Row实例
         this.removeRow(coffeeOrder.emailAddress);
