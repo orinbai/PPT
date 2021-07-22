@@ -2,7 +2,7 @@
     'use strict';
     var FORM_SELECTOR = '[data-coffee-order="form"]';
     var CHECKLIST_SELECTOR = '[data-coffee-order="checklist"]';
-    var SERVER_URL = 'http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
+    var SERVER_URL = 'http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders/';
     var truckID = 'ncc-1701';
     var App = window.App || {};
     var Truck = App.Truck;
@@ -12,8 +12,8 @@
     var Validation = App.Validation;
     var CheckList = App.CheckList;
     var remoteDS = new RemoteDataStore(SERVER_URL);
-    // var myTruck = new Truck(truckID, new DataStore());
-    var myTruck = new Truck(truckID, remoteDS);
+    var myTruck = new Truck(truckID, new DataStore());
+    // var myTruck = new Truck(truckID, remoteDS);
     window.myTruck = myTruck;
 
     var checkList = new CheckList(CHECKLIST_SELECTOR);
@@ -23,11 +23,19 @@
 
     // formHandler.addSubmitHandler(myTruck.createOrder.bind(myTruck));
     formHandler.addSubmitHandler(function (data) {
-        myTruck.createOrder.call(myTruck, data);
-        checkList.addRow.call(checkList, data);
+        return myTruck.createOrder.call(myTruck, data)
+        .then (function () {
+            checkList.addRow.call(checkList, data);
+        },
+        {
+            function () {
+                alert('Server unreachable. Try again later.');
+            }
+        });
     });
 
     formHandler.addInputHandler(Validation.isCompanyEmail);
+    myTruck.printOrders(checkList.addRow.bind(checkList));
     console.log(formHandler);
 
     // 获取 range 值

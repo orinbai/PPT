@@ -25,10 +25,12 @@
                     console.log(item.name + ' is ' + item.value);
                 });
                 console.log(data);
-                fn(data);
-                // 重置form
-                this.reset();
-                this.elements[0].focus();
+                fn(data)
+                .then(function () {
+                    // 重置form
+                    this.reset();
+                    this.elements[0].focus();
+                }.bind(this));
             });
         };
 
