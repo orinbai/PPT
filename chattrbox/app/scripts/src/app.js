@@ -3,4 +3,10 @@ class ChatApp {
         console.log('Hello ES6!');
     }
 }
-new ChatApp();
+class ChatMessage {
+    constructor (data) {
+        
+    }
+}
+// new ChatApp();
+export default ChatApp;
